@@ -47,7 +47,7 @@ class HelloController {
 
   @GetMapping("/")
   String hello() {
-    return "Hello World!";
+    return "Hello World! Welcome to Commerce Dot Com API Services...";
   }
 
 }
