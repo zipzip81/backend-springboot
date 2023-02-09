@@ -57,20 +57,20 @@ class HelloController {
 
 @RestController
 @RequestMapping("/api/v1")
-public class HelloControllerV1 {
+class HelloControllerV1 {
 
     @GetMapping("/hello/{name}")
-    public String hello(@PathVariable String name) {
+    String hello(@PathVariable String name) {
         return "Hello " + name;
     }
 }
 
 @RestController
 @RequestMapping("/api/v2")
-public class HelloControllerV2 {
+class HelloControllerV2 {
 
     @GetMapping("/hello/{name}")
-    public String hello(@PathVariable String name) {
+    String hello(@PathVariable String name) {
         return "Welcome " + name;
     }
 }
