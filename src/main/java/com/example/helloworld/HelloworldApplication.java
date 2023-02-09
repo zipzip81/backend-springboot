@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @SpringBootApplication
 public class HelloworldApplication {
@@ -50,4 +53,24 @@ class HelloController {
     return "Hello World! Welcome to TEST API Services...";
   }
 
+}
+
+@RestController
+@RequestMapping("/api/v1")
+public class HelloControllerV1 {
+
+    @GetMapping("/hello/{name}")
+    public String hello(@PathVariable String name) {
+        return "Hello " + name;
+    }
+}
+
+@RestController
+@RequestMapping("/api/v2")
+public class HelloControllerV2 {
+
+    @GetMapping("/hello/{name}")
+    public String hello(@PathVariable String name) {
+        return "Welcome " + name;
+    }
 }
