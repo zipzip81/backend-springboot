@@ -71,12 +71,21 @@ class AppCdsApplicationListener implements ApplicationListener<ApplicationReadyE
 
 @RestController
 class HelloController {
-
   @GetMapping("/")
   String hello() {
     return "Hello World! Welcome to TEST API Services...";
   }
+}
 
+@RestController
+@RequestMapping("/hello")
+class HelloWorldController {
+
+    @GetMapping
+    String getHello(@RequestParam("name") String name) {
+        String message = "Hello, " + name + "!";
+        return "{\"message\": \"" + message + "\"}";
+    }
 }
 
 @RestController
@@ -85,7 +94,8 @@ class HelloControllerV1 {
 
     @GetMapping("/hello/{name}")
     String hello(@PathVariable String name) {
-        return "Hello " + name;
+        String message = "Hello, " + name + "!";
+        return "{\"message\": \"" + message + "\"}";
     }
 }
 
