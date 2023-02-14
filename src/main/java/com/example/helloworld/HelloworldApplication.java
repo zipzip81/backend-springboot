@@ -77,16 +77,6 @@ class HelloController {
   }
 }
 
-@RestController
-@RequestMapping("/hello")
-class HelloWorldController {
-
-    @GetMapping
-    String getHello(@RequestParam("name") String name) {
-        String message = "Hello, " + name + "!";
-        return "{\"message\": \"" + message + "\"}";
-    }
-}
 
 @RestController
 @RequestMapping("/api/v1")
