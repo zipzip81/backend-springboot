@@ -2,4 +2,4 @@ steps:
 - name: 'gcr.io/cloud-builders/mvn'
   args: ['clean', 'package', '-DskipTests']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'target/*.jar']
+  args: ['app', 'deploy', 'target/helloworld.jar']
