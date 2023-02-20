@@ -12,10 +12,24 @@ steps:
   waitFor: ['set-project']
   id: 'build-app'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'target/helloworld.jar', '--project', 'backend-springboot-000005', '--version', '5', '--quiet', '--promote', '--stop-previous-version', '--no-cache', '--region', 'asia-southeast1']
+  args: ['app', 'deploy', 'target/helloworld.jar', '--project', 'backend-springboot-000005', '--version', '1.0.5', '--quiet', '--promote', '--stop-previous-version', '--no-cache', '--region', 'asia-southeast1']
   waitFor: ['build-app']
   id: 'deploy-to-app-engine'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['projects', 'create', 'backend-springboot-000005', '--quiet']
+  args:
+  - 'projects'
+  - 'list'
+  - '--format'
+  - 'value(projectId)'
+  - '--filter'
+  - 'projectId:backend-springboot-000005'
+  id: 'list-projects'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'projects'
+  - 'create'
+  - 'backend-springboot-000005'
+  - '--quiet'
+  waitFor: ['list-projects']
   id: 'create-project'
-  condition: '$(cat $BUILDER_OUTPUT | grep -c "ERROR: (gcloud.projects.create) Project already exists") != "1"'
+  condition: '$(cat $BUILDER_OUTPUT | grep -c "backend-springboot-000005") != "1"'
