@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/mvn'
+  args: ['clean', 'package', '-DskipTests']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'target/backend-springboot-1.0-SNAPSHOT.jar']
