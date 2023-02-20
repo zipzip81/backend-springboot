@@ -1,7 +1,20 @@
 steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['projects', 'describe', 'backend-springboot-000005']
+  entrypoint: 'bash'
+  id: 'check-project-exists'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['config', 'set', 'project', 'backend-springboot-000005']
+  id: 'set-project'
+  waitFor: ['check-project-exists']
 - name: 'gcr.io/cloud-builders/mvn'
   args: ['clean', 'package', '-DskipTests']
+  env:
+    - 'PROJECT_ID=backend-springboot-000005'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'create', '--region asia-southeast1']
+  args: ['app', 'deploy', 'target/helloworld.jar', '--project', 'backend-springboot-000005', '--version', '1.0.5', '--quiet', '--promote', '--stop-previous-version', '--no-cache', '--region', 'asia-southeast1']
+  waitFor: ['set-project']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'target/helloworld.jar']
+  args: ['projects', 'create', 'backend-springboot-000005']
+  id: 'create-project'
+  condition: '$(cat $BUILDER_OUTPUT | grep -c "ERROR: (gcloud.projects.create) Project already exists") != "1"'
