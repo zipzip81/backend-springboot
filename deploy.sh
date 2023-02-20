@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 1. Create two projects
-gcloud projects create frontend-reactjs-001 --name="Frontend-ReactJS"
-gcloud projects create backend-springboot-001 --name="Backend-Springboot"
+gcloud projects create --name="Frontend-ReactJS"
+gcloud projects create --name="Backend-Springboot"
 
 # Set region to asia-southeast1
 gcloud config set compute/region asia-southeast1
