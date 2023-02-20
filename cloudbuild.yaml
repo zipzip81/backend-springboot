@@ -2,6 +2,6 @@ steps:
 - name: 'gcr.io/cloud-builders/mvn'
   args: ['clean', 'package', '-DskipTests']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'create ', '--region=asia-southeast1']
+  args: ['app', 'create', '--region=asia-southeast1']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', 'target/helloworld.jar', '--project', 'dev-backend-springboot', '--quiet', '--promote', '--stop-previous-version', '--no-cache']
