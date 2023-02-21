@@ -19,39 +19,29 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@RestController
 public class HelloworldApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(HelloworldApplication.class, args);
   }
 	
-  @RestController
-  class HelloController {
   @GetMapping("/")
-	  String hello() {
+  public String hello() {
 	    return "Hello World! Welcome to TEST API Services...";
-	  }
   }
 	
-  @RestController
   @RequestMapping("/api/v1")
-  class HelloControllerV1 {
-
-    @GetMapping("/hello/{name}")
-    String hello(@PathVariable String name) {
+  @GetMapping("/hello/{name}")
+  public String hello(@PathVariable String name) {
         String message = "Hello, " + name + "!";
         return "{\"message\": \"" + message + "\"}";
-    }
   }
-	
-  @RestController
-  @RequestMapping("/api/v2")
-  class HelloControllerV2 {
 
-    @GetMapping("/hello/{name}")
-    String hello(@PathVariable String name) {
+  @RequestMapping("/api/v2")
+  @GetMapping("/hello/{name}")
+  public String hello(@PathVariable String name) {
         return "Welcome " + name;
-    }
   }
 	
 }
