@@ -1,0 +1,18 @@
+swagger: "2.0"
+info:
+  title: "Your API Title(ID)"
+  description: "API on API Gateway with an App Engine backend"
+  version: "1.0.0"
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: OK
+      x-google-backend:
+        address: https://dev-backend-springboot.appspot.com
+        protocol: h2
