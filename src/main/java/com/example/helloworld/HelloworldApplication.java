@@ -27,49 +27,9 @@ public class HelloworldApplication {
   public static void main(String[] args) {
     SpringApplication.run(HelloworldApplication.class, args);
   }
-  
-  @Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("GET");
-		config.addAllowedMethod("POST");
-		config.addAllowedMethod("OPTIONS");
-		source.registerCorsConfiguration("/**", config);
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return bean;
-	}
-  
-}
-
-
-@Component
-@Order(0)
-class AppCdsApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
-  private final boolean appcds;
-  private final ApplicationContext ctx;
-  private final RestTemplate restTemplate = new RestTemplate();
-
-  AppCdsApplicationListener(@Value("${appcds:false}") boolean appcds,
-      ApplicationContext ctx) {
-    this.appcds = appcds;
-    this.ctx = ctx;
-  }
-
-  @Override
-  public void onApplicationEvent(ApplicationReadyEvent event) {
-    if (appcds) {
-      restTemplate.getForEntity("http://localhost:8080/", String.class);
-      SpringApplication.exit(ctx, () -> 0);
-    }
-  }
-}
 
 @RestController
+@CrossOrigin(origins = "*")
 class HelloController {
   @GetMapping("/")
   String hello() {
@@ -79,6 +39,7 @@ class HelloController {
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 class HelloControllerV1 {
 
@@ -90,6 +51,7 @@ class HelloControllerV1 {
 }
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v2")
 class HelloControllerV2 {
 
