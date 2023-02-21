@@ -33,14 +33,14 @@ public class HelloworldApplication {
 	
   @RequestMapping("/api/v1")
   @GetMapping("/hello/{name}")
-  public String hello(@PathVariable String name) {
+  public String helloV1(@PathVariable String name) {
         String message = "Hello, " + name + "!";
         return "{\"message\": \"" + message + "\"}";
   }
 
   @RequestMapping("/api/v2")
   @GetMapping("/hello/{name}")
-  public String hello(@PathVariable String name) {
+  public String helloV2(@PathVariable String name) {
         return "Welcome " + name;
   }
 	
