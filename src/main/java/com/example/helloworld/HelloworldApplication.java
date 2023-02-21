@@ -26,7 +26,7 @@ public class HelloworldApplication {
   }
 	
   @RestController
-  public class HelloController {
+  class HelloController {
   @GetMapping("/")
 	  String hello() {
 	    return "Hello World! Welcome to TEST API Services...";
@@ -35,7 +35,7 @@ public class HelloworldApplication {
 	
   @RestController
   @RequestMapping("/api/v1")
-  public class HelloControllerV1 {
+  class HelloControllerV1 {
 
     @GetMapping("/hello/{name}")
     String hello(@PathVariable String name) {
@@ -46,7 +46,7 @@ public class HelloworldApplication {
 	
   @RestController
   @RequestMapping("/api/v2")
-  public class HelloControllerV2 {
+  class HelloControllerV2 {
 
     @GetMapping("/hello/{name}")
     String hello(@PathVariable String name) {
