@@ -30,7 +30,6 @@ public class HelloworldApplication {
 }
 
 @RestController
-@CrossOrigin(origins = "*")
 class HelloController {
   @GetMapping("/")
   String hello() {
@@ -40,7 +39,6 @@ class HelloController {
 
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 class HelloControllerV1 {
 
@@ -52,7 +50,6 @@ class HelloControllerV1 {
 }
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v2")
 class HelloControllerV2 {
 
