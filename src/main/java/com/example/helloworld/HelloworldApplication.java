@@ -25,48 +25,47 @@ public class HelloworldApplication {
     SpringApplication.run(HelloworldApplication.class, args);
   }
 	
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("https://dev-frontend-reactjs.web.app");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("GET");
-		config.addAllowedMethod("POST");
-		config.addAllowedMethod("OPTIONS");
-		source.registerCorsConfiguration("/**", config);
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-		return bean;
-	}
-}
-
-@RestController
-class HelloController {
-  @GetMapping("/")
-  String hello() {
-    return "Hello World! Welcome to TEST API Services...";
+  @Configuration
+  public class WebConfig{
+  @Bean
+  public WebMvcConfigurer corsConfigurer()
+  {
+	  return new WebMvcConfigurer() {
+		    @Override
+		    public void addCorsMappings(CorsRegistry registry) {
+			registry.addMapping("/**").allowedOrigins("https://dev-frontend-reactjs.web.app");
+		    }
+		};
+	  }
   }
-}
-
-
-@RestController
-@RequestMapping("/api/v1")
-class HelloControllerV1 {
+	
+  @RestController
+  public class HelloController {
+  @GetMapping("/")
+	  String hello() {
+	    return "Hello World! Welcome to TEST API Services...";
+	  }
+  }
+	
+  @RestController
+  @RequestMapping("/api/v1")
+  public class HelloControllerV1 {
 
     @GetMapping("/hello/{name}")
     String hello(@PathVariable String name) {
         String message = "Hello, " + name + "!";
         return "{\"message\": \"" + message + "\"}";
     }
-}
-
-@RestController
-@RequestMapping("/api/v2")
-class HelloControllerV2 {
+  }
+	
+  @RestController
+  @RequestMapping("/api/v2")
+  public class HelloControllerV2 {
 
     @GetMapping("/hello/{name}")
     String hello(@PathVariable String name) {
         return "Welcome " + name;
     }
+  }
+	
 }
