@@ -18,6 +18,20 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+ @Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+					.allowedOrigins("https://dev-frontend-reactjs.web.app")
+					.allowedMethods("GET", "POST", "OPTIONS")
+					.allowedHeaders("*");
+			}
+		};
+	}
+  
+}
 
 @SpringBootApplication
 public class HelloworldApplication {
