@@ -19,6 +19,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 
 @SpringBootApplication
@@ -30,6 +32,7 @@ public class HelloworldApplication {
 }
 
 @RestController
+@CrossOrigin(origins = "*")
 class HelloController {
   @GetMapping("/")
   String hello() {
@@ -39,6 +42,7 @@ class HelloController {
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 class HelloControllerV1 {
 
@@ -50,6 +54,7 @@ class HelloControllerV1 {
 }
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v2")
 class HelloControllerV2 {
 
