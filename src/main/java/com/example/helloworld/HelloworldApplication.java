@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +17,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 @SpringBootApplication
 public class HelloworldApplication {
@@ -32,22 +27,7 @@ public class HelloworldApplication {
   }
 }
 
-@Configuration
-class CorsConfig implements WebMvcConfigurer {
-
-   @Override
-   public void addCorsMappings(CorsRegistry registry) {
-      registry.addMapping("/**")
-         .allowedOrigins("*")
-         .allowedMethods("GET", "POST", "PUT", "DELETE")
-         .allowedHeaders("*")
-         .allowCredentials(false)
-         .maxAge(3600);
-   }
-}
-
 @RestController
-@CrossOrigin(origins = "*")
 class HelloController {
   @GetMapping("/")
   String hello() {
@@ -57,7 +37,6 @@ class HelloController {
 
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 class HelloControllerV1 {
 
@@ -69,7 +48,6 @@ class HelloControllerV1 {
 }
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v2")
 class HelloControllerV2 {
 
